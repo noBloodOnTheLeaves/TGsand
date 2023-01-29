@@ -4,7 +4,6 @@ namespace App\Http\Controllers\API\Telegram;
 
 use App\Http\Controllers\Controller;
 use Telegram\Bot\Api;
-use Telegram\Bot\Laravel\Facades\Telegram;
 
 class TelegramController extends Controller
 {
@@ -46,7 +45,6 @@ class TelegramController extends Controller
             'text' => $message,
             'parse_mode' => 'html',
             'disable_web_page_preview' => true,
-            'reply_to_message_id' => 1376
 
         ]);
         return $message;
