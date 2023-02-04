@@ -87,10 +87,13 @@ class TelegramController extends Controller
          return $this->tg->setWebhook(['url' => 'https://telegram-api.bankai.fun/'.$this->token.'/webhook']);
     }
 
+    public function removeWebhook()
+    {
+        return $this->tg->removeWebhook();
+    }
+
     public function getWebhookUpdates()
     {
         return $this->tg->getWebhookUpdate();
     }
-
-
 }
