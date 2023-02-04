@@ -84,7 +84,8 @@ class TelegramController extends Controller
 
     public function setWebhook(): string
     {
-         return $this->tg->setWebhook(['url' => 'https://telegram-api.bankai.fun/'.$this->token.'/UuqCv37lAyZYjm4a7HuiegROLjt5M46lL0TxxiBmiHbv1Es8nacGrdjElwQkh2dL/webhook']);
+         return $this->tg->setWebhook([
+             'url' => 'https://telegram-api.bankai.fun/api/UuqCv37lAyZYjm4a7HuiegROLjt5M46lL0TxxiBmiHbv1Es8nacGrdjElwQkh2dL/webhook']);
     }
 
     public function removeWebhook()
@@ -105,7 +106,7 @@ class TelegramController extends Controller
     public function getLastWebHookLog(): Response
     {
         $file = escapeshellarg(storage_path("logs/laravel.log"));
-        $line = `tail -n 30 $file`;
+        $line = `tail -n 100 $file`;
 
         dd($line);
     }
