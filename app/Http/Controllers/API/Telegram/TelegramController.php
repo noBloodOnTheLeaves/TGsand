@@ -97,6 +97,11 @@ class TelegramController extends Controller
         return $this->tg->getWebhookUpdate();
     }
 
+    public function getWebhookInfo()
+    {
+        return $this->tg->getWebhookInfo();
+    }
+
     public function getLastWebHookLog(): Response
     {
         $file = escapeshellarg(storage_path("logs/laravel.log"));

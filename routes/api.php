@@ -31,6 +31,8 @@ Route::group(['prefix' => 'tg'], function () {
     Route::get('setWebhook', [TelegramController::class, 'setWebhook']);
     Route::get('removeWebhook', [TelegramController::class, 'removeWebhook']);
     Route::get('getLastWebHookLog', [TelegramController::class, 'getLastWebHookLog']);
+    Route::get('getWebhookUpdates', [TelegramController::class, 'getWebhookUpdates']);
+    Route::get('getWebhookInfo', [TelegramController::class, 'getWebhookInfo']);
 });
 
 Route::post('UuqCv37lAyZYjm4a7HuiegROLjt5M46lL0TxxiBmiHbv1Es8nacGrdjElwQkh2dL/webhook', [TelegramWebHookController::class, 'index']);
