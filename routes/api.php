@@ -26,7 +26,9 @@ Route::group(['prefix' => 'tg'], function () {
     Route::get('getUpdates', [TelegramController::class, 'getUpdates']);
     Route::get('sendMessage/{chatId}/{message}', [TelegramController::class, 'sendMessage']);
     Route::get('sendExampleMessage/{chatId}', [TelegramController::class, 'sendExampleMessage']);
+
+    Route::post('setWebhook', [TelegramController::class, 'setWebhook']);
 });
 
-Route::post('/<token>/webhook', [TelegramController::class, 'getWebhookUpdates']);
+Route::post('/webhook', [TelegramController::class, 'getWebhookUpdates']);
 
