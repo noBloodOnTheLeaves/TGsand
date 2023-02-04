@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\Telegram\TelegramController;
+use App\Http\Controllers\API\Telegram\WebHook\TelegramWebHookController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Telegram\Bot\Laravel\Facades\Telegram;
@@ -32,5 +33,5 @@ Route::group(['prefix' => 'tg'], function () {
     Route::get('getLastWebHookLog', [TelegramController::class, 'getLastWebHookLog']);
 });
 
-Route::post('UuqCv37lAyZYjm4a7HuiegROLjt5M46lL0TxxiBmiHbv1Es8nacGrdjElwQkh2dL/webhook', [TelegramController::class, 'index']);
+Route::post('UuqCv37lAyZYjm4a7HuiegROLjt5M46lL0TxxiBmiHbv1Es8nacGrdjElwQkh2dL/webhook', [TelegramWebHookController::class, 'index']);
 
