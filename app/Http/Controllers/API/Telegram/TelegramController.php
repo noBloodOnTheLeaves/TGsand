@@ -106,7 +106,7 @@ class TelegramController extends Controller
     public function getLastWebHookLog(): Response
     {
         $file = escapeshellarg(storage_path("logs/laravel.log"));
-        $line = `tail -n 100 $file`;
+        $line = `tail -n 200 $file`;
 
         dd($line);
     }
