@@ -41,3 +41,6 @@ services:
 volumes:
     sail-redis:
         driver: local
+networks:
+    ingress_default:
+        external: true
