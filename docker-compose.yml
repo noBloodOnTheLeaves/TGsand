@@ -1,5 +1,5 @@
 # For more information: https://laravel.com/docs/sail
-version: '3'
+version: '3.3'
 services:
     laravel.test:
         build:
@@ -22,6 +22,7 @@ services:
         volumes:
             - '.:/var/www/html'
         networks:
+            - tg
             - ingress_default
         depends_on:
             - redis
@@ -33,6 +34,7 @@ services:
         volumes:
             - 'sail-redis:/data'
         networks:
+            - tg
             - ingress_default
         healthcheck:
             test: ["CMD", "redis-cli", "ping"]
@@ -42,5 +44,7 @@ volumes:
     sail-redis:
         driver: local
 networks:
+    tg:
+        internal: true
     ingress_default:
         external: true
