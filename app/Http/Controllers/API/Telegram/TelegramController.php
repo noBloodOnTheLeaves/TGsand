@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\Telegram;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
 use Telegram\Bot\Api;
+use Telegram\Bot\Laravel\Facades\Telegram;
 
 class TelegramController extends Controller
 {
@@ -24,7 +25,16 @@ class TelegramController extends Controller
 
     public function getCommands(): array
     {
-        return $this->tg->getCommands();
+        $commands = $this->tg->getCommands();
+        if(empty($commands)){
+            $configCommands = config('telegram.bots.mybot.commands');
+            foreach ($configCommands as $command){
+                $this->tg->addCommand($command);
+            }
+            return $this->tg->getCommands();
+        }else{
+            return $commands;
+        }
     }
 
     public function sendMessage(int|string $chatId, string $message): object
@@ -85,7 +95,8 @@ class TelegramController extends Controller
     public function setWebhook(): string
     {
          return $this->tg->setWebhook([
-             'url' => 'https://telegram-api.bankai.fun/api/UuqCv37lAyZYjm4a7HuiegROLjt5M46lL0TxxiBmiHbv1Es8nacGrdjElwQkh2dL/webhook']);
+             'url' => env('TELEGRAM_WEBHOOK_URL')
+         ]);
     }
 
     public function removeWebhook()
@@ -101,6 +112,11 @@ class TelegramController extends Controller
     public function getWebhookInfo()
     {
         return $this->tg->getWebhookInfo();
+    }
+
+    public function updateCommands()
+    {
+        return Telegram::bot(config('telegram.default'));
     }
 
     public function getLastWebHookLog(): Response

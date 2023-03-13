@@ -9,9 +9,10 @@ use Telegram\Bot\Laravel\Facades\Telegram;
 
 class TelegramWebHookController extends Controller
 {
-    public function index(Request $request): void
+    public function index(Request $request)
     {
         Telegram::commandsHandler(true);
         Log::debug($request->all());
+        return 'ok';
     }
 }
