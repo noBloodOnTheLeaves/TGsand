@@ -2,6 +2,8 @@
 
 namespace App\Exceptions;
 
+use App\Http\Controllers\API\Telegram\TelegramController;
+use Illuminate\Contracts\Container\Container;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -41,6 +43,25 @@ class Handler extends ExceptionHandler
      *
      * @return void
      */
+    protected $telegram;
+
+    public function __construct(Container $container, TelegramController $telegram)
+    {
+        parent::__construct($container);
+        $this->telegram = $telegram;
+    }
+
+    public function report(Throwable $e)
+    {
+        $data = [
+            'description' => $e->getMessage(),
+            'file' => $e->getFile(),
+            'line' => $e->getLine(),
+        ];
+        $this->telegram->sendMessage('856091201', (string)view('report', $data));
+
+    }
+
     public function register()
     {
         $this->reportable(function (Throwable $e) {

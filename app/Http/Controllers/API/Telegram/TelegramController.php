@@ -14,7 +14,7 @@ class TelegramController extends Controller
 
     public function __construct()
     {
-        $this->token = env('TELEGRAM_BOT_TOKEN');
+        $this->token = config('telegram.bots.bezliki_bot.token');
         $this->tg = new Api($this->token);
     }
 
@@ -27,7 +27,7 @@ class TelegramController extends Controller
     {
         $commands = $this->tg->getCommands();
         if(empty($commands)){
-            $configCommands = config('telegram.bots.mybot.commands');
+            $configCommands = config('telegram.bots.bezliki_bot.commands');
             foreach ($configCommands as $command){
                 $this->tg->addCommand($command);
             }
@@ -95,7 +95,7 @@ class TelegramController extends Controller
     public function setWebhook(): string
     {
          return $this->tg->setWebhook([
-             'url' => env('TELEGRAM_WEBHOOK_URL')
+             'url' => config('telegram.bots.bezliki_bot.webhook_url')
          ]);
     }
 
