@@ -31,4 +31,10 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'yandex' => [
+        'token' => env('YANDEX_IAM_TOKEN'),
+        'translate_api_url' => env('YANDEX_TRANSLATE_API'),
+        'cloud_folder' => env('YANDEX_CLOUD_FOLDER_ID')
+    ],
+
 ];

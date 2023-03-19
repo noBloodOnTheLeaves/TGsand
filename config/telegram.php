@@ -1,6 +1,8 @@
 <?php
 
-use App\Http\Controllers\API\Telegram\Commands\StartCommand;
+use App\Http\Controllers\API\Telegram\Commands\GptQuestionCommand;
+use App\Http\Controllers\API\Telegram\Commands\HelpCommand;
+use App\Http\Controllers\API\Telegram\Commands\TranslateCommand;
 
 return [
     /*
@@ -31,13 +33,14 @@ return [
     |             ]
     */
     'bots'                         => [
-        'bezliki_bot' => [
+        env('TELEGRAM_BOT_NAME') => [
             'token'               => env('TELEGRAM_BOT_TOKEN', 'YOUR-BOT-TOKEN'),
             'certificate_path'    => env('TELEGRAM_CERTIFICATE_PATH', 'YOUR-CERTIFICATE-PATH'),
             'webhook_url'         => env('TELEGRAM_WEBHOOK_URL', 'YOUR-BOT-WEBHOOK-URL'),
             'commands'            => [
-                Telegram\Bot\Commands\HelpCommand::class,
-                StartCommand::class,
+                HelpCommand::class,
+                TranslateCommand::class,
+                GptQuestionCommand::class,
             ],
         ],
 
@@ -55,7 +58,7 @@ return [
     | your default bot for regular use.
     |
     */
-    'default'                      => 'bezliki_bot',
+    'default'                      => env('TELEGRAM_BOT_NAME'),
 
     /*
     |--------------------------------------------------------------------------
@@ -114,8 +117,9 @@ return [
     |
     */
     'commands'                     => [
-        Telegram\Bot\Commands\HelpCommand::class,
-        StartCommand::class,
+        HelpCommand::class,
+        TranslateCommand::class,
+        GptQuestionCommand::class,
     ],
 
     /*
